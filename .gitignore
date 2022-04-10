@@ -85,6 +85,8 @@ lib/
 lib64/
 parts/
 sdist/
+/Scripts
+*.nu
 var/
 wheels/
 *.egg-info/
