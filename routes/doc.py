@@ -1,11 +1,17 @@
 from fastapi import APIRouter
 
 from models.doc import Doc
-from config.db import connection
+from config.db import client
 from schemas.doc import docEntity, docsEntity
 
-doc = APIRouter()
+router = APIRouter()
+db = client.doc
 
-@doc.get('/api/docs')
+@router.get('/api/docs')
 async def find_all_docs():
-  return docsEntity(connection.local.doc.find())
+  return docsEntity(db.docs.find())
+
+@router.post('/api/create-doc')
+async def create_doc(doc: Doc):
+  new_doc = db.docs.insert_one(dict(doc))
+  return 
